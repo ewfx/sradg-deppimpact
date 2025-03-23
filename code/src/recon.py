@@ -26,11 +26,11 @@ app.add_middleware(
 )
 
 @app.get("/")
-async def main():
+def main():
     return {"mssg": "hi"}
 
 @app.get("/fetchnchecklatest")
-async def fetchnchecklatest():
+def fetchnchecklatest():
     keys = ["col1", "col2", "col3"]  #make configurable
     txt = ""
 
@@ -63,7 +63,7 @@ async def fetchnchecklatest():
     
     
     df = pd.concat([df, pd.DataFrame([dictVal])], ignore_index= False)
-    
+    df = df[::-1]
     df.to_csv(path, index=False)
     return {"values": df.to_dict("records")}
 

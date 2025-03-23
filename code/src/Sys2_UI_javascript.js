@@ -1,5 +1,6 @@
 
 let url2 = "http://127.0.0.2:8000/getalldetails";
+let url2_1 = "http://127.0.0.2:8000/addvalue";
 
 
 
@@ -14,6 +15,19 @@ function callSys2(){
             getHeaders(res.values[0]);
             for(let r of res.values)
                 sys2table.innerHTML += (convertResToTableRows(r));
+        })
+        .catch( err =>{
+            console.log("Err: ", err );
+        })
+
+}
+
+function addValue2(){
+    
+    fetch(url2_1, {headers: {'Access-Control-Allow-Origin':'*'}})
+    .then(resp => resp.json())
+        .then(res => {
+            callSys2();
         })
         .catch( err =>{
             console.log("Err: ", err );
@@ -40,5 +54,4 @@ function convertResToTableRows(jsonVal)
 }
 
 
-callSys2_Headers();
 callSys2();

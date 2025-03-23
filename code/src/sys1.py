@@ -19,7 +19,11 @@ app.add_middleware(
 )
 
 @app.get("/")
-async def main():
+def main():
+    return {"mssg": "Hello1"}
+
+@app.get("/addvalue")
+def AddValue():
     values = {
         "datetime": datetime.datetime.now() ,
         "col1": 1, 
@@ -28,16 +32,17 @@ async def main():
         } #make configurable
      
     appendFileCsv(values)
-    return {"mssg": "Hello1"}; 
+    return {"mssg": "Added1"}; 
 
 @app.get("/getalldetails")
-async def GetAllDetails():
+def GetAllDetails():
     df = pd.read_csv(path)
+    df = df.iloc[::-1]
     return {"values": df.to_dict("records")}
 
 
 @app.get("/getlatestdetail")
-async def GetLatestDetail():   
+def GetLatestDetail():   
     df = pd.read_csv(path)
     return df.tail(1).to_dict("records")
 
