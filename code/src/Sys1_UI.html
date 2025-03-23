@@ -1,0 +1,51 @@
+<html>
+<style>
+    #sys1, #sys2{
+        position: relative; 
+        display: inline-block; 
+        vertical-align: top; 
+        height: 600px; 
+        width: 300px; 
+        background-color: antiquewhite;
+
+        padding: 10px;
+    }
+    #recon{
+        position: relative; 
+        display: inline-block; 
+        vertical-align: top; 
+        height: 600px; 
+        width: 800px; 
+        background-color: aquamarine;
+
+        padding: 10px;
+    }
+
+    td{
+        border: 1px solid rgba(0,0,0,0.2);
+    }
+
+    th{
+        border: 1px solid rgba(0,0,0,0.5);
+        background-color: azure;
+    }
+</style>
+
+<script src="./Sys1_UI_javascript.js"></script>
+<div id="header">
+    <div style="background-color: rgba(215, 30, 40, 1); height: 60px;">
+        <img src="./WFLogo.png" />
+    </div>
+    <div style="background-color: rgba(255, 205, 63, 1); height: 5px;"></div>
+</div>
+
+<div style="position: relative; margin-top: 30px; height: 600px; width: 2000px;" >
+    <div id="sys1">
+        <h3> Source System 1</h3>
+        <div>
+            <table id="sys1table"></table>
+            <button onclick="callSys1()" style="position: relative; ">Fetch Sys1 Data</button>
+        </div>
+    </div>
+</div>
+</html>
