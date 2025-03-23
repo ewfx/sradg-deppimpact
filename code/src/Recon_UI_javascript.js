@@ -2,18 +2,6 @@
 let url = "http://127.0.0.3:8000/fetchnchecklatest"; 
 
 
-function callRecon_Headers(){
-    fetch(url, {headers: {'Access-Control-Allow-Origin':'*'}})
-        .then(resp => resp.json())
-        .then(res => {
-            console.log(res)
-            let recontable = document.getElementById("recontable");
-            recontable.innerHTML = getHeaders(res.values[0]);
-        })
-        .catch( err =>{
-            console.log("Err: ", err );
-        })
-}
 
 function callRecon(){
     
@@ -22,6 +10,8 @@ function callRecon(){
         .then(res => {
             console.log(res)
             let recontable = document.getElementById("recontable");
+            recontable.innerHTML = '<tr id="table_header"></tr>'
+            getHeaders(res.values[0])
             for(let r of res.values)
                 recontable.innerHTML += (convertResToTableRows(r));
         })
@@ -34,11 +24,11 @@ function callRecon(){
 
 function getHeaders(jsonVal)
 {
-    let txt = "<tr>";
+    let ele = document.getElementById("table_header");
+    txt = "";
     for(let key of Object.keys(jsonVal))
         txt += ("<th>"+key+"</th>")
-    txt += "</tr>";
-    return txt;
+    ele.innerHTML = txt 
 }
 
 function convertResToTableRows(jsonVal)
@@ -51,6 +41,6 @@ function convertResToTableRows(jsonVal)
 }
 
 function callReconTable(){
-    callRecon_Headers();
+    
     callRecon(); 
 }
