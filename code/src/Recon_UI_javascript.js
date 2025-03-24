@@ -12,8 +12,11 @@ function callRecon(){
             let recontable = document.getElementById("recontable");
             recontable.innerHTML = '<tr id="table_header"></tr>'
             getHeaders(res.values[0])
-            for(let r of res.values)
-                recontable.innerHTML += (convertResToTableRows(r));
+            let k = res.values.length
+            for(let r of res.values){
+                recontable.innerHTML += (convertResToTableRows(r, k));
+                k--;
+            }
         })
         .catch( err =>{
             console.log("Err: ", err );
@@ -25,15 +28,15 @@ function callRecon(){
 function getHeaders(jsonVal)
 {
     let ele = document.getElementById("table_header");
-    txt = "";
+    txt = "<th>SlNo.</th>";
     for(let key of Object.keys(jsonVal))
         txt += ("<th>"+key+"</th>")
     ele.innerHTML = txt 
 }
 
-function convertResToTableRows(jsonVal)
+function convertResToTableRows(jsonVal, k)
 {
-    let txt = "<tr>";
+    let txt = "<tr><td>"+k+"</td>";
     for(let key of Object.keys(jsonVal))
         txt += ("<td>"+jsonVal[key]+"</td>")
     txt += "</tr>";
