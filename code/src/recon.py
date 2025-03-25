@@ -7,6 +7,9 @@ from pydantic import BaseModel
 
 import requests
 from fastapi.middleware.cors import CORSMiddleware
+
+from fastapi.responses import HTMLResponse
+
 import pandas as pd
 import datetime
 
@@ -202,3 +205,43 @@ def checkPattern(a, b, c):
 #rounding factopr
 #currency diff
 #not updated values 
+
+
+
+
+@app.get("/ticket/{appId}/{recordId}")
+def TicketSite(appId: str, recordId: str):
+
+
+    html_content = '''
+<html>
+    <style>
+        .label{
+            padding: 5px;
+            color: gray;
+        }
+        .input{
+            width: 100%;
+        }
+    </style>
+    <div style="width: 100%; height: 100%; background: linear-gradient(180deg, rgba(32,80,129,1) 50%, rgba(244, 245,247,1) 50%); overflow: auto;">
+        <div style="position: relative; padding: 0px 40px 0px 40px; margin: auto; width: 400px; height: 600px; background-color: white; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.2);">
+            <br/><br/>
+            <div id="header"><h3>Raise new ticket</h3></div>
+            <br/><br/>
+            <div class="label">AppId</div>
+            <div class="input"><input type="text" value="'''+ appId +'''"></div>
+            <br/><br/>
+            <div class="label">Record Id</div>
+            <div class="input"><input type="text" value="''' +recordId + '''"></div>
+            <br/><br/>  
+            <div class="label">Reason for Error</div>
+            <div class="input"><textarea rows="10" cols="50">This is an anomaly because ... </textarea></div>
+            <button style="position: absolute; bottom: 50px; right: 50px;"  onclick="">Submit</button>
+        </div>
+    </div>
+
+</html>
+    '''
+    return HTMLResponse(content=html_content, status_code=200)
+

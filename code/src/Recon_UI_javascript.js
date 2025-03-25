@@ -1,8 +1,10 @@
 
 let url = "http://127.0.0.3:8000/fetchnchecklatest"; 
 let url_analyze = "http://127.0.0.3:8000/analyze"; 
+let url_refresh = "http://127.0.0.3:8000/refresh"; 
 let url_analyze_latest = "http://127.0.0.3:8000/analyze_latest"; 
 let url_rag_prompt = "http://127.0.0.3:8000/get_llm_response"
+let url_ticket = "http://127.0.0.3:8000/ticket"
 
 
 function callRecon(){
@@ -31,6 +33,28 @@ function callRecon(){
 function analyze(){
     showSiteLoader();
     fetch(url_analyze, {headers: {'Access-Control-Allow-Origin':'*'}})
+    .then(resp => resp.json())
+        .then(res => {
+            console.log(res)
+            let recontable = document.getElementById("recontable");
+            recontable.innerHTML = '<tr id="table_header"></tr>'
+            getHeaders(res.values[0])
+            let k = res.values.length
+            for(let r of res.values){
+                recontable.innerHTML += (convertResToTableRows(r, k));
+                k--;
+            }
+            hideSiteLoader()
+        })
+        .catch( err =>{
+            hideSiteLoader()
+            console.log("Err: ", err );
+        })
+}
+
+function refresh(){
+    showSiteLoader();
+    fetch(url_refresh, {headers: {'Access-Control-Allow-Origin':'*'}})
     .then(resp => resp.json())
         .then(res => {
             console.log(res)
@@ -114,7 +138,7 @@ function rag_prompt(){
 function getHeaders(jsonVal)
 {
     let ele = document.getElementById("table_header");
-    txt = "<th>SlNo.</th>";
+    txt = "<th></th><th>SlNo.</th>";
     for(let key of Object.keys(jsonVal))
         txt += ("<th>"+key+"</th>")
     ele.innerHTML = txt 
@@ -122,14 +146,12 @@ function getHeaders(jsonVal)
 
 function convertResToTableRows(jsonVal, k)
 {
-    let txt = "<tr><td>"+k+"</td>";
+    let txt = "<tr><td><a href='" + url_ticket+ "/DEPP/"+k+"'><img src='add_comment.png' /></a></td><td>"+k+"</td>";
     for(let key of Object.keys(jsonVal))
         txt += ("<td>"+jsonVal[key]+"</td>")
     txt += "</tr>";
     return txt;
 }
-
-
 
 
 
@@ -146,3 +168,6 @@ function hideSiteLoader(){
 function showSiteLoader(){
     document.getElementById("site_loader").style.display = "block";
 }
+
+
+refresh();
