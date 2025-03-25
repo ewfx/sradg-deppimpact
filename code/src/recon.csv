@@ -1,3 +1,11 @@
 datetime,sys1__col1,sys2__col1,diff__col1,res__col1,anomaly__col1,sys1__col2,sys2__col2,diff__col2,res__col2,anomaly__col2,sys1__col3,sys2__col3,diff__col3,res__col3,anomaly__col3,anomaly,comments
-2025-03-25 08:45:17.019364,21,1,-20,False, ,30,10,-20,False, ,40,20,-20,False, , , 
-2025-03-25 08:45:16.418911,21,1,-20,False, ,30,10,-20,False, ,40,20,-20,False, , , 
+2025-03-25 18:38:20.767697,11,1,-10,False,_,20,10,-10,False,_,30,20,-10,False,_,_,_
+2025-03-25 18:38:20.030046,11,1,-10,False,_,20,10,-10,False,_,30,20,-10,False,_,_,_
+2025-03-25 18:38:17.639410,11,1,-10,False,_,20,10,-10,False,_,30,20,-10,False,_,_,_
+2025-03-25 18:24:50.873353,11,1,-10,False,no,20,10,-10,False,no,30,20,-10,False,no,False,"_For column col1- no; Reason: Based on historical data, an anomaly is absent for the first row for column col1 because the difference between 'sys1__col1' and 'sys2__col1' is -10, which is likely within a certain threshold.,For column col2- no; Reason: The anomaly is absent for the first row for column col2 because the anomaly detection logic is based on criteria beyond just the difference between sys1 and sys2 columns, and the specific conditions for marking an anomaly as '_' or 'no' are not clear from the provided data.,For column col3- no; Reason: The anomaly is absent for the first row for column col3 because the difference between 'sys1__col3' and 'sys2__col3' is -10, which is within some predetermined threshold for what is considered normal.,"
+2025-03-25 18:24:31.651938,11,1,-10,False,no,20,10,-10,False,no,30,20,-10,False,no,False,_
+2025-03-25 18:20:42.164791,11,1,-10,False,_,20,10,-10,False,_,30,20,-10,False,_,_,_
+2025-03-25 18:19:19.312967,21,1,-20,False,_,30,10,-20,False,_,40,20,-20,False,_,_,_
+2025-03-25 18:18:24.047036,21,1,-20,False,_,30,10,-20,False,_,40,20,-20,False,_,_,_
+2025-03-25 18:16:55.043625,21,1,-20,False,_,30,10,-20,False,_,40,20,-20,False,_,_,_
+2025-03-25 18:16:42.228970,21,1,-20,False,no,30,10,-20,False,no,40,20,-20,False,no,False,_

@@ -1,11 +1,12 @@
 
 let url = "http://127.0.0.3:8000/fetchnchecklatest"; 
 let url_analyze = "http://127.0.0.3:8000/analyze"; 
+let url_analyze_latest = "http://127.0.0.3:8000/analyze_latest"; 
 let url_rag_prompt = "http://127.0.0.3:8000/get_llm_response"
 
 
 function callRecon(){
-    
+    showSiteLoader();
     fetch(url, {headers: {'Access-Control-Allow-Origin':'*'}})
     .then(resp => resp.json())
         .then(res => {
@@ -18,14 +19,17 @@ function callRecon(){
                 recontable.innerHTML += (convertResToTableRows(r, k));
                 k--;
             }
+            hideSiteLoader();
         })
         .catch( err =>{
             console.log("Err: ", err );
+            hideSiteLoader();
         })
 
 }
 
 function analyze(){
+    showSiteLoader();
     fetch(url_analyze, {headers: {'Access-Control-Allow-Origin':'*'}})
     .then(resp => resp.json())
         .then(res => {
@@ -38,8 +42,32 @@ function analyze(){
                 recontable.innerHTML += (convertResToTableRows(r, k));
                 k--;
             }
+            hideSiteLoader()
         })
         .catch( err =>{
+            hideSiteLoader()
+            console.log("Err: ", err );
+        })
+}
+
+function analyze_latest(){
+    showSiteLoader();
+    fetch(url_analyze_latest, {headers: {'Access-Control-Allow-Origin':'*'}})
+    .then(resp => resp.json())
+        .then(res => {
+            console.log(res)
+            let recontable = document.getElementById("recontable");
+            recontable.innerHTML = '<tr id="table_header"></tr>'
+            getHeaders(res.values[0])
+            let k = res.values.length
+            for(let r of res.values){
+                recontable.innerHTML += (convertResToTableRows(r, k));
+                k--;
+            }
+            hideSiteLoader()
+        })
+        .catch( err =>{
+            hideSiteLoader()
             console.log("Err: ", err );
         })
 }
@@ -108,4 +136,13 @@ function convertResToTableRows(jsonVal, k)
 function callReconTable(){
     
     callRecon(); 
+}
+
+function hideSiteLoader(){
+    document.getElementById("site_loader").style.display = "none";
+}
+
+
+function showSiteLoader(){
+    document.getElementById("site_loader").style.display = "block";
 }

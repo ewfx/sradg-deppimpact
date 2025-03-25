@@ -69,20 +69,21 @@
     <div style="background-color: rgba(255, 205, 63, 1); height: 5px;"></div>
 </div>
 
+<div id="site_loader" style="display: none; position: absolute; top: 45%; left:45%; z-index: 9;"><img src="spinner.gif"/></div>
 <div style="position: relative; margin-top: 30px; height: 600px;" >
     
     
     <div id="recon" >
         <h3> Reconcilliation System </h3>
         <div> 
-            <button onclick="analyze()">Analyze</button>
+            <button onclick="analyze_latest()">Analyze Latest</button>
             <button onclick="callReconTable()" style="position: relative; ">Fetch Recon Data</button>
             <div style="height: 500px; width: 1200px; overflow: auto;"><table id="recontable"><tr id="table_header"></tr></table></div>
         </div>
     </div>
 
     <div id="rag_prompt" style="z-index: 2;">
-        
+        <div id="rag_prompt_header"></div>
         <div style="position: relative; height: 500px; width: 220px;">
             <div id="rag_prompt_display" style="position: absolute; top: 5px; left: 5px; height: 450px; width: 210px; border: 1px solid black; overflow-y: auto; ">
             </div>

@@ -1,7 +1,5 @@
 question,answer
-What is last row data?,"The last row data is the row with index 1, which has a datetime value of 2025-03-25 08:45:16.418911, and the rest of the column values as shown in the output."
-What is last row data?,"The last row data is the row with index 1, which has a datetime value of 2025-03-25 08:45:16.418911, and the rest of the column values as shown in the output."
-AS A,"As a data analyst, I can infer from this dataframe that it contains only two identical rows, with no variation in any of the columns. This suggests that the data may not be representative or useful for analysis."
-Are there any anamolies in the data?,"Yes, there are anomalies in the data, and they are present in all rows of the dataframe."
-why?,No response found. Please ask again.
-why are you lying ?,"The question ""why are you lying?"" doesn't make sense in the context of a pandas dataframe."
+"Based on historical data, is there an anomaly for the first row for column col1? Answer either yes or no",no
+why?,"I'm unable to provide a meaningful answer to the question ""why?"" without more context or clarification."
+"Based on historical data, why is an anomaly present/absent for the first row for column col1?",No response found. Please try again.
+"Based on historical data, is there an anomaly for the first row for column col1 and why so?","Based on historical data, there is no anomaly for the first row for column col1 because the difference between 'sys1__col1' and 'sys2__col1' is -10, which is likely within a certain threshold."

@@ -62,7 +62,8 @@ def fetchnchecklatest():
     df = pd.read_csv(path, index_col=False)
     df['datetime'] = pd.to_datetime(df['datetime'])
 
-    dictVal = { "datetime": datetime.datetime.now()}
+    dictVal = { "datetime": datetime.datetime.now(), "anomaly": "_", "comments": "_"}
+    isAnyAnomaly = False
     for k_idx in range(0, len(keys)):
         key = keys[k_idx]
         k = keys[k_idx]
@@ -71,11 +72,16 @@ def fetchnchecklatest():
             dictVal["sys2__"+k] = d2[k]
             dictVal["diff__"+k] = d2[k] - d1[k]
             dictVal["res__"+k] = (d1[k] == d2[k])
-            dictVal["anomaly__"+k] = " "
+            dictVal["anomaly__"+k] = "_"
+            #resp = ask_llm("Based on historical data, is there an anomaly? Answer in yes or no.")
+            #if "yes" in resp.lower():
+            #    dictVal["anomaly__"+k] = True
+            #    isAnyAnomaly = True
+            #    resp2 = ask_llm("Based on historical data, why is there an anomaly?")
+            #    dictVal["comments"] += ("For column "+ k + "- Reason: " + resp2 + ",")
+            
             print("sys1__"+k)
     
-    dictVal["anomaly"] = " "
-    dictVal["comments"] = " "
 
 
     df = pd.concat([df, pd.DataFrame([dictVal])], ignore_index= False)
@@ -83,6 +89,36 @@ def fetchnchecklatest():
     df.to_csv(path, index=False)
     return {"values": df.to_dict("records")}
 
+@app.get("/analyze_latest")
+def analyze_latest():
+    df = pd.read_csv(path, index_col=False)
+    
+    #df = df.sort_values(by=['datetime'])
+    keys = ['col1', 'col2', 'col3']  #make configurable
+
+    row_idx = 0
+    
+    isAnyAnomaly = False
+    for k_idx in range(0, len(keys)):
+        key = keys[k_idx]
+        k = keys[k_idx]
+        
+        resp = ask_llm("Based on historical data, is there an anomaly for the first row for column "+k+"? Answer in either yes or no.")
+        df.at[row_idx, "anomaly__" + k] = resp
+        if "yes" in resp.lower():
+            #df.at[row_idx, "anomaly__"+k] = True
+            isAnyAnomaly = True
+        resp2 = ask_llm("Based on historical data, why is an anomaly present/absent for the first row for column "+k+"?" )
+        df.at[row_idx,"comments"] = df.iloc[row_idx]["comments"] + ("For column "+ k + "- "+resp+"; Reason: " + resp2 + ",")
+        
+        print("sys1__"+k)
+    
+    df.at[row_idx, "anomaly"] = isAnyAnomaly
+
+    df['datetime'] = pd.to_datetime(df['datetime'])
+    df = df.sort_values(by=['datetime'], ascending=False)   
+    df.to_csv(path, index=False)
+    return {"values": df.to_dict("records")}
 
 @app.get("/analyze")
 def analyze():
@@ -100,12 +136,12 @@ def analyze():
             print("idx now:"+str(idx))
             if(idx <3): continue
 
-            if df.iloc[idx]["res__"+col] == "True": continue  #ie. if Match then no anamoly check
+            if df.iloc[idx]["res__"+col] == "True": continue  #ie. if Match then no anomaly check
             else:
                 val = checkPattern(df.iloc[idx-2]["diff__"+col], df.iloc[idx-1]["diff__"+col], df.iloc[idx-0]["diff__"+col])
                 print("idx:"+str(idx)+" val:"+str(val))
-                df.at[idx, "anamoly__"+col] = val
-                #df.iloc[idx]["anamoly__"+col] = val
+                df.at[idx, "anomaly__"+col] = val
+                #df.iloc[idx]["anomaly__"+col] = val
 
                 if val:
                     print(df.iloc[idx]["comments"])
@@ -134,19 +170,21 @@ class get_llm_response_Item(BaseModel):
 def get_llm_response(get_llm_response_item: get_llm_response_Item):    
     #print( get_llm_response_item.query)
     df_qa = pd.read_csv(path_qa)
-    llm = ChatGroq(temperature=0, model="llama3-70b-8192", api_key=groq_api)    
-    agent = create_csv_agent(llm, path, verbose=False, allow_dangerous_code=True)
     try:
-        response = agent.invoke(get_llm_response_item.query)
+        response = ask_llm(get_llm_response_item.query)
     except:
-        response = {"output": "No response found. Please ask again."}
-    jsonVal_qa = {"question": get_llm_response_item.query,"answer": response['output']}
+        response = "No response found. Please try again."
+    jsonVal_qa = {"question": get_llm_response_item.query,"answer": response}
     df_qa = pd.concat([df_qa, pd.DataFrame([jsonVal_qa])])
     df_qa.to_csv(path_qa, index=False)
     #return {"values": [{"question":  get_llm_response_item.query, "answer": get_llm_response_item.query}]}
     return {"values": df_qa.to_dict("records")}
 
 
+def ask_llm(qry):
+    llm = ChatGroq(temperature=0, model="llama3-70b-8192", api_key=groq_api)    
+    agent = create_csv_agent(llm, path, verbose=False, allow_dangerous_code=True)
+    return agent.invoke(qry)['output']
 
 def appendFile(txt):
     file = open(path,'a')
