@@ -15,7 +15,7 @@
         display: inline-block; 
         vertical-align: top; 
         height: 600px; 
-        width: 800px; 
+        width: 1200px; 
         background-color: aquamarine;
 
         padding: 10px;
@@ -29,6 +29,37 @@
         border: 1px solid rgba(0,0,0,0.5);
         background-color: azure;
     }
+
+    #rag_prompt{
+        position: absolute; 
+        right: 50px; 
+        bottom: 0px; 
+        height: 500px; 
+        width: 220px; 
+        background-color: white;
+        box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.3);
+    }
+
+    .qq{
+        background-color: rgba(255, 119, 8, 0.2);
+        margin: 2px;
+        width: 180px;
+        padding: 2px ;
+        text-align: right;
+        position: relative;
+        float: right;
+        font-size: small;
+    }
+    .aa{
+        background-color: rgba(0, 255, 47, 0.2);
+        margin: 2px;
+        padding: 2px;
+        width: 180px;
+        text-align: left;
+        position: relative;
+        float: left;
+        font-size: small;
+    }
 </style>
 <script src="./Recon_UI_javascript.js"></script>
 <div id="header">
@@ -38,15 +69,30 @@
     <div style="background-color: rgba(255, 205, 63, 1); height: 5px;"></div>
 </div>
 
-<div style="position: relative; margin-top: 30px; height: 600px; width: 2000px;" >
+<div style="position: relative; margin-top: 30px; height: 600px;" >
     
     
     <div id="recon" >
         <h3> Reconcilliation System </h3>
-        <div>
+        <div> 
+            <button onclick="analyze()">Analyze</button>
             <button onclick="callReconTable()" style="position: relative; ">Fetch Recon Data</button>
-            <div style="height: 500px; overflow: auto;"><table id="recontable"><tr id="table_header"></tr></table></div>
+            <div style="height: 500px; width: 1200px; overflow: auto;"><table id="recontable"><tr id="table_header"></tr></table></div>
         </div>
+    </div>
+
+    <div id="rag_prompt" style="z-index: 2;">
+        
+        <div style="position: relative; height: 500px; width: 220px;">
+            <div id="rag_prompt_display" style="position: absolute; top: 5px; left: 5px; height: 450px; width: 210px; border: 1px solid black; overflow-y: auto; ">
+            </div>
+            <div id="load" style="position: absolute; top: 50%; left: 50%; display: none;"><img src="spinner.gif" style="width: 30px; height: 30px;"></div>
+                
+            <div style="position: absolute; left: 5px; bottom: 5px;">
+                <input id="rag_prompt_input" type="text" style="display: inline-block;"/>
+                <button onclick="rag_prompt()" style="display: inline-block;"> Ask </button>
+            </div>
+        </div>        
     </div>
     
     
