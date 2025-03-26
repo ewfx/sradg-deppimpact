@@ -29,6 +29,36 @@
         border: 1px solid rgba(0,0,0,0.5);
         background-color: azure;
     }
+    #rag_prompt{
+        position: absolute; 
+        right: 50px; 
+        bottom: 0px; 
+        height: 500px; 
+        width: 220px; 
+        background-color: white;
+        box-shadow: 3px 3px 3px 3px rgba(0,0,0,0.3);
+    }
+
+    .qq{
+        background-color: rgba(255, 119, 8, 0.2);
+        margin: 2px;
+        width: 180px;
+        padding: 2px ;
+        text-align: right;
+        position: relative;
+        float: right;
+        font-size: small;
+    }
+    .aa{
+        background-color: rgba(0, 255, 47, 0.2);
+        margin: 2px;
+        padding: 2px;
+        width: 180px;
+        text-align: left;
+        position: relative;
+        float: left;
+        font-size: small;
+    }
 </style>
 <script src="./Sys2_UI_javascript.js"></script>
 <div id="header">
@@ -48,5 +78,19 @@
             <div style="height: 500px; overflow: auto;"><table id="sys2table" style="height: 500px; overflow: auto;"><tr id="table_header"></tr></table></div>
         </div>
     </div>
+</div>
+
+<div id="rag_prompt" style="z-index: 2;">
+    <div id="rag_prompt_header"></div>
+    <div style="position: relative; height: 500px; width: 220px;">
+        <div id="rag_prompt_display" style="position: absolute; top: 5px; left: 5px; height: 450px; width: 210px; border: 1px solid black; overflow-y: auto; ">
+        </div>
+        <div id="load" style="position: absolute; top: 50%; left: 50%; display: none;"><img src="spinner.gif" style="width: 30px; height: 30px;"></div>
+            
+        <div style="position: absolute; left: 5px; bottom: 5px;">
+            <input id="rag_prompt_input" type="text" style="display: inline-block;"/>
+            <button onclick="rag_prompt()" style="display: inline-block;"> Ask </button>
+        </div>
+    </div>        
 </div>
 </html>

@@ -1,4 +1,14 @@
 datetime,sys1__col1,sys2__col1,diff__col1,res__col1,anomaly__col1,sys1__col2,sys2__col2,diff__col2,res__col2,anomaly__col2,sys1__col3,sys2__col3,diff__col3,res__col3,anomaly__col3,anomaly,comments
+2025-03-26 19:09:02.916903,11,1,-10,False,_,20,10,-10,False,_,30,20,-10,False,_,_,_
+2025-03-26 19:08:24.222192,11,1,-10,False,_,20,10,-10,False,_,30,20,-10,False,_,_,_
+2025-03-26 19:08:23.673128,11,1,-10,False,_,20,10,-10,False,_,30,20,-10,False,_,_,_
+2025-03-26 19:08:23.457119,11,1,-10,False,_,20,10,-10,False,_,30,20,-10,False,_,_,_
+2025-03-26 19:08:23.200851,11,1,-10,False,_,20,10,-10,False,_,30,20,-10,False,_,_,_
+2025-03-26 19:08:22.513041,11,1,-10,False,_,20,10,-10,False,_,30,20,-10,False,_,_,_
+2025-03-26 19:08:22.012802,11,1,-10,False,_,20,10,-10,False,_,30,20,-10,False,_,_,_
+2025-03-26 19:08:21.431084,11,1,-10,False,_,20,10,-10,False,_,30,20,-10,False,_,_,_
+2025-03-26 19:05:19.165428,11,1,-10,False,no,20,10,-10,False,no,30,20,-10,False,no,False,"_For column col1- no; Reason: There is no anomaly present for the first row for column col1 because the `anomaly__col1` value is `_`, which indicates no anomaly.,For column col2- no; Reason: Based on historical data, an anomaly is absent for the first row for column `col2` because the difference between `sys1__col2` and `sys2__col2` is `-10`, which is not significant enough to trigger an anomaly.,For column col3- no; Reason: Based on historical data, an anomaly is absent for the first row for column col3 because the value in the `anomaly__col3` column is '_', which indicates no anomaly.,"
+2025-03-26 19:05:09.600941,11,1,-10,False,_,20,10,-10,False,_,30,20,-10,False,_,_,_
 2025-03-25 22:13:49.363726,11,1,-10,False,_,20,10,-10,False,_,30,20,-10,False,_,_,_
 2025-03-25 22:12:01.484992,11,1,-10,False,_,20,10,-10,False,_,30,20,-10,False,_,_,_
 2025-03-25 22:11:50.368844,11,1,-10,False,_,20,10,-10,False,_,30,20,-10,False,_,_,_

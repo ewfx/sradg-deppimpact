@@ -3,22 +3,4 @@ question,answer
 why?,"I'm unable to provide a meaningful answer to the question ""why?"" without more context or clarification."
 "Based on historical data, why is an anomaly present/absent for the first row for column col1?",No response found. Please try again.
 "Based on historical data, is there an anomaly for the first row for column col1 and why so?","Based on historical data, there is no anomaly for the first row for column col1 because the difference between 'sys1__col1' and 'sys2__col1' is -10, which is likely within a certain threshold."
-what is the first row data?,"The first row data is a series with the values: 
-datetime: 2025-03-25 22:13:49.363726, 
-sys1__col1: 11, 
-sys2__col1: 1, 
-diff__col1: -10, 
-res__col1: False, 
-anomaly__col1: _, 
-sys1__col2: 20, 
-sys2__col2: 10, 
-diff__col2: -10, 
-res__col2: False, 
-anomaly__col2: _, 
-sys1__col3: 30, 
-sys2__col3: 20, 
-diff__col3: -10, 
-res__col3: False, 
-anomaly__col3: _, 
-anomaly: _, 
-comments: _."
+what is the last row?,"The last row of the dataframe is the one with datetime '2025-03-23 21:29:20.467517' and values 1, 10, 20 for columns col1, col2, col3 respectively."

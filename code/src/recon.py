@@ -1,5 +1,5 @@
 #conda activate hack2025
-#cd C:\Users\ProgsNeedNoSpace\MinicondaEnvs\hack2025\sradg-deppimpact\code\src
+#cd F:\hack2025\sradg-deppimpact\code\src
 #uvicorn recon:app --host 127.0.0.3
 
 from fastapi import FastAPI
